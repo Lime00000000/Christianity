@@ -3,6 +3,7 @@ import sys
 import io
 from PyQt6 import uic
 import sqlite3
+from main import Main
 
 
 template = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -114,13 +115,14 @@ class Pseudonym(QDialog):
         cur = bd.cursor()
         while True:
             login, ok = QInputDialog.getText(self, ' ', 'Введите логин')
-            if ok and login:
+            query1 = f""" SELECT name FROM user WHERE name = '{login}' """
+            if ok and login and cur.execute(query1).fetchall():
                 while True:
                     password, ok = QInputDialog.getText(self, ' ', 'Введите пароль')
-                    if ok and password:
-                        query = f""" IF EXISTS (SELECT  user (password, name) VALUES('{login}', '{password}')) """
-                        cur.execute(query)
-                        break
+                    query2 = f""" SELECT password FROM user WHERE name = '{login}' """
+                    if ok and password == cur.execute(query2).fetchall()[0][0]:
+                        h = Main()
+                        h.show()
                     if ok is False:
                         break
                 break
@@ -128,7 +130,6 @@ class Pseudonym(QDialog):
                 break
         bd.commit()
         bd.close()
-        self.close()
 
 
 if __name__ == '__main__':

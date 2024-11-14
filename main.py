@@ -13,10 +13,8 @@ class Main(QMainWindow, QDialog):
         self.hide()
         self.initUI()
 
-
     def initUI(self):
-        self.h = Pseudonym(self)
-        self.h.show()
+        pass
 
 
 if __name__ == '__main__':
