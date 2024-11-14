@@ -2,6 +2,7 @@ from PyQt6.QtWidgets import QInputDialog, QMainWindow, QDialog, QApplication
 import sys
 import io
 from PyQt6 import uic
+import sqlite3
 
 
 template = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -35,14 +36,14 @@ template = '''<?xml version="1.0" encoding="UTF-8"?>
     <item>
      <widget class="QPushButton" name="inbtn">
       <property name="text">
-       <string>Я уже смешарик</string>
+       <string>Я хочу стать смешариком</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="new_inbtn">
       <property name="text">
-       <string>Я хочу стать смешариком</string>
+       <string>Я уже смешарик</string>
       </property>
      </widget>
     </item>
@@ -73,12 +74,7 @@ template = '''<?xml version="1.0" encoding="UTF-8"?>
  </resources>
  <connections/>
 </ui>
-
 '''
-
-
-def reg():
-    pass
 
 
 class Pseudonym(QDialog):
@@ -87,22 +83,51 @@ class Pseudonym(QDialog):
         f = io.StringIO(template)
         uic.loadUi(f, self)
         self.inbtn.clicked.connect(self.reg)
+        self.new_inbtn.clicked.connect(self.reg_old)
 
     def reg(self):
-        check = False
+        bd = sqlite3.connect('user.db')
+        cur = bd.cursor()
+        g = 'Придумайте логин'
+        while True:
+            login, ok = QInputDialog.getText(self, ' ', g)
+            query1 = f""" SELECT name FROM user WHERE name = '{login}' """
+            if ok and login and not cur.execute(query1).fetchall():
+                while True:
+                    password, ok = QInputDialog.getText(self, ' ', 'Придумайте пароль')
+                    if ok and password:
+                        query = f""" INSERT INTO user (password, name) VALUES('{login}', '{password}') """
+                        cur.execute(query)
+                        break
+                    if ok is False:
+                        break
+                break
+            if cur.execute(query1).fetchall():
+                g = 'Такое уже есть'
+            if ok is False:
+                break
+        bd.commit()
+        bd.close()
+
+    def reg_old(self):
+        bd = sqlite3.connect('user.db')
+        cur = bd.cursor()
         while True:
             login, ok = QInputDialog.getText(self, ' ', 'Введите логин')
             if ok and login:
                 while True:
                     password, ok = QInputDialog.getText(self, ' ', 'Введите пароль')
                     if ok and password:
-                        check = True
+                        query = f""" IF EXISTS (SELECT  user (password, name) VALUES('{login}', '{password}')) """
+                        cur.execute(query)
                         break
                     if ok is False:
                         break
                 break
             if ok is False:
                 break
+        bd.commit()
+        bd.close()
 
 
 if __name__ == '__main__':

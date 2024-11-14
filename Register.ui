@@ -29,14 +29,14 @@
     <item>
      <widget class="QPushButton" name="inbtn">
       <property name="text">
-       <string>Я уже смешарик</string>
+       <string>Я хочу стать смешариком</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="new_inbtn">
       <property name="text">
-       <string>Я хочу стать смешариком</string>
+       <string>Я уже смешарик</string>
       </property>
      </widget>
     </item>

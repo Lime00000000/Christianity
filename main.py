@@ -1,13 +1,82 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QDialog
 from music_test import music_player
-import register
+from register import Pseudonym
 import sqlite3
 import io
 import os
 
 
-template_reg = ''''''
+template = '''<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1025</width>
+    <height>529</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>350</y>
+     <width>701</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>50</number>
+    </property>
+    <item>
+     <widget class="QPushButton" name="inbtn">
+      <property name="text">
+       <string>Я уже смешарик</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="new_inbtn">
+      <property name="text">
+       <string>Я хочу стать смешариком</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>500</y>
+     <width>271</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="lineWidth">
+    <number>16</number>
+   </property>
+   <property name="midLineWidth">
+    <number>14</number>
+   </property>
+   <property name="text">
+    <string>Чтобы стать boss of the gym, необходимо воркать...</string>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../../Downloads/21113999-85ae-5494-a4ce-56786b2eb509.qrc"/>
+ </resources>
+ <connections/>
+</ui>
+'''
 
 
 class Main(QMainWindow, QDialog):
@@ -18,12 +87,9 @@ class Main(QMainWindow, QDialog):
     def initUI(self):
         bd = sqlite3.connect('user.db')
         cur = bd.cursor()
-        query = """ INSERT INTO user (password, name) VALUES('1', 'what') """
-        cur.execute(query)
+        Pseudonym()
         bd.commit()
         bd.close()
-
-        print(os.system("python register.py"))
 
 
 
