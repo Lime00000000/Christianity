@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QInputDialog, QMainWindow, QDialog, QApplication
+from PyQt6.QtWidgets import QInputDialog, QDialog, QApplication
 import sys
 import io
 from PyQt6 import uic
@@ -128,6 +128,7 @@ class Pseudonym(QDialog):
                 break
         bd.commit()
         bd.close()
+        self.close()
 
 
 if __name__ == '__main__':
@@ -135,11 +136,3 @@ if __name__ == '__main__':
     ex = Pseudonym()
     ex.show()
     sys.exit(app.exec())
-
-
-
-
-
-
-
-
