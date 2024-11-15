@@ -6,7 +6,7 @@ import sqlite3
 from main import Main
 
 
-template = '''<?xml version="1.0" encoding="UTF-8"?>
+template_reg = '''<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>Dialog</class>
  <widget class="QDialog" name="Dialog">
@@ -81,7 +81,7 @@ template = '''<?xml version="1.0" encoding="UTF-8"?>
 class Pseudonym(QDialog):
     def __init__(self, *args):
         super().__init__()
-        f = io.StringIO(template)
+        f = io.StringIO(template_reg)
         uic.loadUi(f, self)
         self.inbtn.clicked.connect(self.reg)
         self.new_inbtn.clicked.connect(self.reg_old)
@@ -113,23 +113,19 @@ class Pseudonym(QDialog):
     def reg_old(self):
         bd = sqlite3.connect('user.db')
         cur = bd.cursor()
-        while True:
+        flag = True
+        while flag:
             login, ok = QInputDialog.getText(self, ' ', 'Введите логин')
             query1 = f""" SELECT name FROM user WHERE name = '{login}' """
             if ok and login and cur.execute(query1).fetchall():
-                while True:
+                while flag:
                     password, ok = QInputDialog.getText(self, ' ', 'Введите пароль')
                     query2 = f""" SELECT password FROM user WHERE name = '{login}' """
                     if ok and password == cur.execute(query2).fetchall()[0][0]:
-                        h = Main()
-                        h.show()
-                    if ok is False:
-                        break
-                break
-            if ok is False:
-                break
-        bd.commit()
-        bd.close()
+                        self.h = Main(self)
+                        self.hide()
+                        self.h.show()
+                        flag = False
 
 
 if __name__ == '__main__':
