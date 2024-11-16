@@ -1,11 +1,12 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QDialog
-from music_test import music_player
+from music_test import AudioPlayer
 import sqlite3
 import io
 import os
 from PyQt6 import uic
 import threading
+import pyglet
 
 
 template_main = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -33,7 +34,7 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
     </rect>
    </property>
    <property name="text">
-    <string>Запустить лучший трек</string>
+    <string>Плеер</string>
    </property>
    <property name="autoExclusive">
     <bool>false</bool>
@@ -71,16 +72,21 @@ class Main(QMainWindow, QDialog):
         f = io.StringIO(template_main)
         uic.loadUi(f, self)
         self.pushButton.clicked.connect(self.song)
+        self.pushButton_2.clicked.connect(self.pr)
 
     def song(self):
-        self.h = threading.Thread(target=music_player, args=(self,), name='thr-1')
-        self.h.start()
+        self.h = AudioPlayer(self)
+        self.h.show()
+
+    def pr(self):
+        print('wefwefwef')
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = Main()
     ex.show()
+    pyglet.app.run()
     sys.exit(app.exec())
 
 
