@@ -126,6 +126,8 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
 class Main(QDialog):
     def __init__(self, *args):
         super().__init__()
+        if not args:
+            args = '123'
         self.initUI(args)
         self.reg = args[0]
 
