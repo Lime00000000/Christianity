@@ -1,5 +1,6 @@
 import pyglet
 from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget
+import sys
 
 
 class AudioPlayer(QWidget):
@@ -8,18 +9,15 @@ class AudioPlayer(QWidget):
 
         self.initUI(args)
 
-        # Инициализация Pyglet
         self.player = pyglet.media.Player()
         self.source = pyglet.media.load('cool_music.mp3')
         self.player.queue(self.source)
-        self.player.loop = True  # зациклить трек
+        self.player.loop = True
 
-        # Параметры окна
         self.setWindowTitle('Audio Player')
         self.setGeometry(100, 100, 300, 200)
 
     def initUI(self, *args):
-        # Создание интерфейса
         self.button = QPushButton('Запустить лучший трек', self)
         self.button.clicked.connect(self.toggle_music)
 
@@ -37,10 +35,8 @@ class AudioPlayer(QWidget):
 
 
 if __name__ == '__main__':
-    import sys
-
     app = QApplication(sys.argv)
     player = AudioPlayer()
     player.show()
-    pyglet.app.run()  # Запускаем только один цикл событий
+    pyglet.app.run()
     sys.exit(app.exec())
