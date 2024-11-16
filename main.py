@@ -76,12 +76,18 @@ class Main(QMainWindow, QDialog):
         self.pushButton_2.clicked.connect(self.EXIT)
 
     def song(self):
-        self.h = AudioPlayer(self)
-        self.h.show()
+        self.player = AudioPlayer(self)
+        self.player.show()
 
     def EXIT(self):
+        try:
+            self.player.player.pause()
+            self.player.close()
+        except Exception:
+            pass
         self.reg.show()
         self.close()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
