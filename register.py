@@ -79,7 +79,7 @@ template_reg = '''<?xml version="1.0" encoding="UTF-8"?>
 
 
 class Pseudonym(QDialog):
-    def __init__(self, *args):
+    def __init__(self):
         super().__init__()
         f = io.StringIO(template_reg)
         uic.loadUi(f, self)
