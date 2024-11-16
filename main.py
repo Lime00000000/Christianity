@@ -1,10 +1,11 @@
 import sys
 from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QDialog
-from music_test import MusicPlayer
+from music_test import music_player
 import sqlite3
 import io
 import os
 from PyQt6 import uic
+import threading
 
 
 template_main = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -72,8 +73,8 @@ class Main(QMainWindow, QDialog):
         self.pushButton.clicked.connect(self.song)
 
     def song(self):
-        self.h = MusicPlayer(self)
-        self.h.show()
+        self.h = threading.Thread(target=music_player, args=(self,), name='thr-1')
+        self.h.start()
 
 
 if __name__ == '__main__':
