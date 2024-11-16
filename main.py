@@ -67,20 +67,21 @@ class Main(QMainWindow, QDialog):
     def __init__(self, *args):
         super().__init__()
         self.initUI(args)
+        self.reg = args[0]
 
     def initUI(self, args):
         f = io.StringIO(template_main)
         uic.loadUi(f, self)
         self.pushButton.clicked.connect(self.song)
-        self.pushButton_2.clicked.connect(self.pr)
+        self.pushButton_2.clicked.connect(self.EXIT)
 
     def song(self):
         self.h = AudioPlayer(self)
         self.h.show()
 
-    def pr(self):
-        print('wefwefwef')
-
+    def EXIT(self):
+        self.reg.show()
+        self.close()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

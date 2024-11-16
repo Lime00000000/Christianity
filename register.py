@@ -90,25 +90,24 @@ class Pseudonym(QDialog):
         bd = sqlite3.connect('user.db')
         cur = bd.cursor()
         g = 'Придумайте логин'
-        while True:
+        flag = True
+        while flag:
             login, ok = QInputDialog.getText(self, ' ', g)
             query1 = f""" SELECT name FROM user WHERE name = '{login}' """
             if ok and login and not cur.execute(query1).fetchall():
-                while True:
+                while flag:
                     password, ok = QInputDialog.getText(self, ' ', 'Придумайте пароль')
                     if ok and password:
                         query = f""" INSERT INTO user (password, name) VALUES('{login}', '{password}') """
                         cur.execute(query)
-                        break
-                    if ok is False:
-                        break
-                break
+                        self.h = Main(self)
+                        self.hide()
+                        self.h.show()
+                        flag = False
             if cur.execute(query1).fetchall():
                 g = 'Такое уже есть'
             if ok is False:
                 break
-        bd.commit()
-        bd.close()
 
     def reg_old(self):
         bd = sqlite3.connect('user.db')
@@ -126,6 +125,8 @@ class Pseudonym(QDialog):
                         self.hide()
                         self.h.show()
                         flag = False
+                        break
+                break
 
 
 if __name__ == '__main__':
