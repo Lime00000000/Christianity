@@ -354,6 +354,12 @@ class Main(QDialog):
         self.pushButton_4.clicked.connect(self.eat)
         self.pushButton_8.clicked.connect(self.set_dark_theme)
         self.pushButton_7.clicked.connect(self.set_light_theme)
+        self.pushButton_9.clicked.connect(self.add)
+
+    def add(self):
+        if self.lineEdit.text() != '':
+            self.comboBox.addItem(self.lineEdit.text())
+            print(self.comboBox.currentText())
 
     def song(self):
         self.player = AudioPlayer(self)
