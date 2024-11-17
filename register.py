@@ -100,13 +100,18 @@ class Pseudonym(QDialog):
                     if ok and password:
                         query = f""" INSERT INTO user (password, name) VALUES('{login}', '{password}') """
                         cur.execute(query)
+                        bd.commit()
                         self.h = Main(self)
                         self.hide()
                         self.h.show()
                         flag = False
+                        break
+                    if not ok:
+                        break
+                break
             if cur.execute(query1).fetchall():
                 g = 'Такое уже есть'
-            if ok is False:
+            if not ok:
                 break
 
     def reg_old(self):
@@ -126,6 +131,9 @@ class Pseudonym(QDialog):
                         self.h.show()
                         flag = False
                         break
+                    if not ok:
+                        break
+            if not ok:
                 break
 
 

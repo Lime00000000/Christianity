@@ -1,9 +1,10 @@
 import sys
-from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QDialog
-from music_test import AudioPlayer
 import io
-from PyQt6 import uic
 import pyglet
+from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QDialog
+from PyQt6 import uic
+from music_test import AudioPlayer
+from set_theme import set_light_theme, set_dark_theme
 
 
 template_main = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -152,22 +153,11 @@ class Main(QDialog):
         self.reg.show()
         self.close()
 
-    def set_light_theme(self):
-        self.setStyleSheet("background-color: white; color: black;")
-        self.pushButton.setStyleSheet(
-            'QPushButton {background-color: white; border: 2px solid black; border-radius: 5px;}')
-        for i in range(2, 9):
-            g = f"self.pushButton_{i}.setStyleSheet(" + "'QPushButton {background-color: white; border: 2px solid black; border-radius: 5px;}'" + ")"
-            exec(g)
-
-
     def set_dark_theme(self):
-        self.setStyleSheet("background-color: rgb(30, 30, 30));")
-        self.pushButton.setStyleSheet(
-            'QPushButton {background-color: rgb(60, 60, 60);}')
-        for i in range(2, 9):
-            g = f"self.pushButton_{i}.setStyleSheet(" + "'QPushButton {background-color: rgb(60, 60, 60);}'" + ")"
-            exec(g)
+        set_dark_theme(self)
+
+    def set_light_theme(self):
+        set_light_theme(self)
 
 
 if __name__ == '__main__':
