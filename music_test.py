@@ -33,6 +33,10 @@ class AudioPlayer(QWidget):
             self.player.play()
             self.button.setText('Остановить')
 
+    def closeEvent(self, a0):
+        if self.player.playing:
+            self.player.pause()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

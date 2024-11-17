@@ -19,12 +19,24 @@
      <x>0</x>
      <y>0</y>
      <width>181</width>
-     <height>531</height>
+     <height>511</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>25</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QPushButton" name="pushButton_3">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>Имба Калькулятор на 200 строк</string>
       </property>
@@ -32,6 +44,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_4">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>PushButton</string>
       </property>
@@ -39,8 +57,14 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
-       <string>Запустить лучший трек</string>
+       <string>Плеер с лучшим</string>
       </property>
       <property name="autoExclusive">
        <bool>false</bool>
@@ -52,6 +76,12 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_6">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>PushButton</string>
       </property>
@@ -59,8 +89,15 @@
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_5">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Если хочешь в IT и тебе
+не нужна шкила</string>
       </property>
      </widget>
     </item>
@@ -70,9 +107,9 @@
    <property name="geometry">
     <rect>
      <x>874</x>
-     <y>482</y>
+     <y>471</y>
      <width>150</width>
-     <height>30</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">

@@ -1,6 +1,7 @@
 import sys
 import io
 import pyglet
+import webbrowser
 from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QDialog
 from PyQt6 import uic
 from music_test import AudioPlayer
@@ -29,12 +30,24 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
      <x>0</x>
      <y>0</y>
      <width>181</width>
-     <height>531</height>
+     <height>511</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>25</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QPushButton" name="pushButton_3">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>Имба Калькулятор на 200 строк</string>
       </property>
@@ -42,6 +55,12 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_4">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>PushButton</string>
       </property>
@@ -49,8 +68,14 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
-       <string>Запустить лучший трек</string>
+       <string>Плеер с лучшим</string>
       </property>
       <property name="autoExclusive">
        <bool>false</bool>
@@ -62,6 +87,12 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_6">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
        <string>PushButton</string>
       </property>
@@ -69,8 +100,15 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_5">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Если хочешь в IT и тебе
+не нужна шкила</string>
       </property>
      </widget>
     </item>
@@ -80,9 +118,9 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
    <property name="geometry">
     <rect>
      <x>874</x>
-     <y>482</y>
+     <y>471</y>
      <width>150</width>
-     <height>30</height>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
@@ -136,6 +174,7 @@ class Main(QDialog):
         self.pushButton.clicked.connect(self.song)
         self.pushButton_2.clicked.connect(self.EXIT)
         self.pushButton_3.clicked.connect(self.Calc)
+        self.pushButton_5.clicked.connect(self.tg)
         self.pushButton_8.clicked.connect(self.set_dark_theme)
         self.pushButton_7.clicked.connect(self.set_light_theme)
 
@@ -157,6 +196,9 @@ class Main(QDialog):
     def Calc(self):
         self.Calculator = Calculator(self)
         self.Calculator.show()
+
+    def tg(self):
+        webbrowser.open('t.me/tset03_bot')
 
     def set_dark_theme(self):
         set_dark_theme(self)
