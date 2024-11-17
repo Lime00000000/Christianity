@@ -51,7 +51,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Кушать</string>
       </property>
      </widget>
     </item>

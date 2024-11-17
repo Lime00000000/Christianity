@@ -2,11 +2,12 @@ import sys
 import io
 import pyglet
 import webbrowser
-from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QDialog
+from PyQt6.QtWidgets import QApplication, QDialog
 from PyQt6 import uic
 from music_test import AudioPlayer
 from set_theme import set_light_theme, set_dark_theme
 from calculator import Calculator
+from order import Food
 
 
 template_main = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -62,7 +63,7 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
        </sizepolicy>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>Кушать</string>
       </property>
      </widget>
     </item>
@@ -175,6 +176,7 @@ class Main(QDialog):
         self.pushButton_2.clicked.connect(self.EXIT)
         self.pushButton_3.clicked.connect(self.Calc)
         self.pushButton_5.clicked.connect(self.tg)
+        self.pushButton_4.clicked.connect(self.eat)
         self.pushButton_8.clicked.connect(self.set_dark_theme)
         self.pushButton_7.clicked.connect(self.set_light_theme)
 
@@ -199,6 +201,10 @@ class Main(QDialog):
 
     def tg(self):
         webbrowser.open('t.me/tset03_bot')
+
+    def eat(self):
+        self.order = Food(self)
+        self.order.show()
 
     def set_dark_theme(self):
         set_dark_theme(self)
