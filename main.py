@@ -5,6 +5,7 @@ from PyQt6.QtWidgets import QApplication, QWidget, QInputDialog, QMainWindow, QD
 from PyQt6 import uic
 from music_test import AudioPlayer
 from set_theme import set_light_theme, set_dark_theme
+from calculator import Calculator
 
 
 template_main = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -35,7 +36,7 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
     <item>
      <widget class="QPushButton" name="pushButton_3">
       <property name="text">
-       <string>PushButton</string>
+       <string>Имба Калькулятор на 200 строк</string>
       </property>
      </widget>
     </item>
@@ -118,9 +119,6 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
  <resources/>
  <connections/>
 </ui>
-
-
-
 '''
 
 
@@ -137,6 +135,7 @@ class Main(QDialog):
         uic.loadUi(f, self)
         self.pushButton.clicked.connect(self.song)
         self.pushButton_2.clicked.connect(self.EXIT)
+        self.pushButton_3.clicked.connect(self.Calc)
         self.pushButton_8.clicked.connect(self.set_dark_theme)
         self.pushButton_7.clicked.connect(self.set_light_theme)
 
@@ -148,10 +147,16 @@ class Main(QDialog):
         try:
             self.player.player.pause()
             self.player.close()
+
+            self.Calculator.close()
         except Exception:
             pass
         self.reg.show()
         self.close()
+
+    def Calc(self):
+        self.Calculator = Calculator(self)
+        self.Calculator.show()
 
     def set_dark_theme(self):
         set_dark_theme(self)
