@@ -223,7 +223,9 @@ class Main(QDialog):
         uic.loadUi(f, self)
         db = sqlite3.connect('user.db')
         cur = db.cursor()
-        self.tasks = list(cur.execute(f'''SELECT task FROM user WHERE '{self.ac[0]}' = name AND '{self.ac[1]}' = password''').fetchall()[0])
+        self.tasks = list(cur.execute(f'''SELECT task FROM user WHERE '{self.ac[0]}' = name AND '{self.ac[1]}' = password''').fetchall())
+        if self.tasks:
+            self.tasks = self.tasks[0]
         if self.tasks != ['None']:
             t = []
             for el in self.tasks:
