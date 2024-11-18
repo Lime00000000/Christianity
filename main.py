@@ -2,6 +2,7 @@ import sys
 import io
 import pyglet
 import webbrowser
+import sqlite3
 from PyQt6.QtWidgets import QApplication, QDialog
 from PyQt6 import uic
 from music_test import AudioPlayer
@@ -18,31 +19,64 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1024</width>
-    <height>512</height>
+    <width>683</width>
+    <height>222</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>181</width>
-     <height>511</height>
+     <x>530</x>
+     <y>190</y>
+     <width>151</width>
+     <height>31</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>25</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="text">
+       <string>Выход</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>0</y>
+     <width>461</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QComboBox" name="comboBox">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lineEdit">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_9">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -50,7 +84,48 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
        </sizepolicy>
       </property>
       <property name="text">
-       <string>Имба Калькулятор на 200 строк</string>
+       <string>Добавить
+Задачу</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Удалить
+Задачу</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="horizontalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>60</y>
+     <width>681</width>
+     <height>131</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <item>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Если хочешь в IT и тебе
+не нужна шкила</string>
       </property>
      </widget>
     </item>
@@ -87,7 +162,7 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_6">
+     <widget class="QPushButton" name="pushButton_3">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -95,49 +170,22 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
        </sizepolicy>
       </property>
       <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_5">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Если хочешь в IT и тебе
-не нужна шкила</string>
+       <string>Имба Калькулятор</string>
       </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QWidget" name="horizontalLayoutWidget_3">
    <property name="geometry">
     <rect>
-     <x>881</x>
-     <y>471</y>
-     <width>143</width>
-     <height>41</height>
+     <x>0</x>
+     <y>190</y>
+     <width>201</width>
+     <height>31</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Выход</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>880</x>
-     <y>0</y>
-     <width>141</width>
-     <height>80</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
      <widget class="QPushButton" name="pushButton_7">
       <property name="text">
@@ -154,181 +202,6 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
     </item>
    </layout>
   </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>0</y>
-     <width>16</width>
-     <height>512</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16</width>
-     <height>531</height>
-    </size>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-   <property name="midLineWidth">
-    <number>0</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="Line" name="line_2">
-   <property name="geometry">
-    <rect>
-     <x>860</x>
-     <y>0</y>
-     <width>16</width>
-     <height>512</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>16</width>
-     <height>531</height>
-    </size>
-   </property>
-   <property name="frameShadow">
-    <enum>QFrame::Plain</enum>
-   </property>
-   <property name="lineWidth">
-    <number>2</number>
-   </property>
-   <property name="midLineWidth">
-    <number>0</number>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
-  </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>330</x>
-     <y>0</y>
-     <width>391</width>
-     <height>36</height>
-    </rect>
-   </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QComboBox" name="comboBox">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="lineEdit"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_9">
-      <property name="text">
-       <string>Добавить
-Предмет</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QTextBrowser" name="textBrowser">
-   <property name="geometry">
-    <rect>
-     <x>200</x>
-     <y>80</y>
-     <width>256</width>
-     <height>421</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QTextBrowser" name="textBrowser_2">
-   <property name="geometry">
-    <rect>
-     <x>600</x>
-     <y>80</y>
-     <width>256</width>
-     <height>421</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>480</x>
-     <y>260</y>
-     <width>91</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>72</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>⮕</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>50</y>
-     <width>191</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Надо сделать</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>640</x>
-     <y>50</y>
-     <width>191</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Сделано</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections/>
@@ -341,12 +214,25 @@ class Main(QDialog):
         super().__init__()
         if not args:
             args = '123'
-        self.initUI(args)
         self.reg = args[0]
+        self.ac = (args[1], args[2])
+        self.initUI(args)
 
     def initUI(self, args):
         f = io.StringIO(template_main)
         uic.loadUi(f, self)
+        db = sqlite3.connect('user.db')
+        cur = db.cursor()
+        self.tasks = list(cur.execute(f'''SELECT task FROM user WHERE '{self.ac[0]}' = name AND '{self.ac[1]}' = password''').fetchall()[0])
+        if self.tasks != ['None']:
+            t = []
+            for el in self.tasks:
+                for el1 in el.split():
+                    if el1 != 'None':
+                        t.append(el1)
+            self.tasks = t
+            for el in self.tasks:
+                self.comboBox.addItem(el)
         self.pushButton.clicked.connect(self.song)
         self.pushButton_2.clicked.connect(self.EXIT)
         self.pushButton_3.clicked.connect(self.Calc)
@@ -355,11 +241,25 @@ class Main(QDialog):
         self.pushButton_8.clicked.connect(self.set_dark_theme)
         self.pushButton_7.clicked.connect(self.set_light_theme)
         self.pushButton_9.clicked.connect(self.add)
+        self.pushButton_10.clicked.connect(self.remove_item)
+
+        db.commit()
+        db.close()
 
     def add(self):
         if self.lineEdit.text() != '':
-            self.comboBox.addItem(self.lineEdit.text())
-            print(self.comboBox.currentText())
+            item_to_check = self.lineEdit.text()
+            index = self.comboBox.findText(item_to_check)
+            if index == -1:
+                self.comboBox.addItem(self.lineEdit.text())
+                self.tasks.append(self.lineEdit.text())
+
+    def remove_item(self):
+        current_index = self.comboBox.currentIndex()
+        if current_index != -1:
+            self.tasks.remove(self.comboBox.itemText(current_index))
+            self.comboBox.removeItem(current_index)
+
 
     def song(self):
         self.player = AudioPlayer(self)
@@ -371,8 +271,16 @@ class Main(QDialog):
             self.player.close()
 
             self.Calculator.close()
+            self.order.close()
         except Exception:
             pass
+
+        db = sqlite3.connect('user.db')
+        cur = db.cursor()
+
+        cur.execute(f'''Update user set task = '{' '.join(self.tasks)}' where '{self.ac[0]}' = name''')
+        db.commit()
+        db.close()
         self.reg.show()
         self.close()
 

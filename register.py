@@ -98,10 +98,11 @@ class Pseudonym(QDialog):
                 while flag:
                     password, ok = QInputDialog.getText(self, ' ', 'Придумайте пароль')
                     if ok and password:
-                        query = f""" INSERT INTO user (password, name) VALUES('{login}', '{password}') """
+                        query = f""" INSERT INTO user (password, name, task) VALUES('{login}', '{password}', '{None}') """
                         cur.execute(query)
                         bd.commit()
-                        self.h = Main(self)
+                        bd.close()
+                        self.h = Main(self, login, password)
                         self.hide()
                         self.h.show()
                         flag = False
@@ -126,7 +127,7 @@ class Pseudonym(QDialog):
                     password, ok = QInputDialog.getText(self, ' ', 'Введите пароль')
                     query2 = f""" SELECT password FROM user WHERE name = '{login}' """
                     if ok and password == cur.execute(query2).fetchall()[0][0]:
-                        self.h = Main(self)
+                        self.h = Main(self, login, password)
                         self.hide()
                         self.h.show()
                         flag = False
