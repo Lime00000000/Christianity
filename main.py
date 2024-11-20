@@ -255,6 +255,7 @@ class Main(QDialog):
             if index == -1:
                 self.comboBox.addItem(self.lineEdit.text())
                 self.tasks.append(self.lineEdit.text())
+                self.lineEdit.setText('')
 
     def remove_item(self):
         current_index = self.comboBox.currentIndex()

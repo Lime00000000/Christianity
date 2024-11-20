@@ -65,17 +65,20 @@ class Food(QWidget):
         self.h3.clicked.connect(self.hitmenu)
 
     def hit(self):
-        self.order.clear()
-        self.order.insertPlainText('Ваш заказ' + '\n' + '\n')
-        z = 0
-        for el in self.checkboxes:
-            if el.isChecked():
-                b = '-----'
-                z += CODE[el.text()] * int(self.inputs[CODE1[el.text()]].text())
-                self.order.insertPlainText(el.text() + b + self.inputs[CODE1[el.text()]].text() + b
-                                           + str(CODE[el.text()] * int(self.inputs[CODE1[el.text()]].text())) + '\n')
-        self.order.insertPlainText('\n')
-        self.order.insertPlainText(f'Итого: {z}')
+        try:
+            self.order.clear()
+            self.order.insertPlainText('Ваш заказ' + '\n' + '\n')
+            z = 0
+            for el in self.checkboxes:
+                if el.isChecked() and self.inputs[CODE1[el.text()]].text() != '':
+                    b = '-----'
+                    z += CODE[el.text()] * int(self.inputs[CODE1[el.text()]].text())
+                    self.order.insertPlainText(el.text() + b + self.inputs[CODE1[el.text()]].text() + b
+                                               + str(CODE[el.text()] * int(self.inputs[CODE1[el.text()]].text())) + '\n')
+            self.order.insertPlainText('\n')
+            self.order.insertPlainText(f'Итого: {z}')
+        except Exception:
+            pass
 
     def hitmenu(self):
         p = self.sender().text()
