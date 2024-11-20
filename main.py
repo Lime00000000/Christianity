@@ -229,7 +229,7 @@ class Main(QDialog):
         if self.tasks != ['None']:
             t = []
             for el in self.tasks:
-                for el1 in el.split():
+                for el1 in el.split('kod'):
                     if el1 != 'None':
                         t.append(el1)
             self.tasks = t
@@ -281,7 +281,7 @@ class Main(QDialog):
         db = sqlite3.connect('user.db')
         cur = db.cursor()
 
-        cur.execute(f'''Update user set task = '{' '.join(self.tasks)}' where '{self.ac[0]}' = name''')
+        cur.execute(f'''Update user set task = '{'kod'.join(self.tasks)}' where '{self.ac[0]}' = name''')
         db.commit()
         db.close()
         self.reg.show()
