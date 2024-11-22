@@ -9,6 +9,7 @@ from music_test import AudioPlayer
 from set_theme import set_light_theme, set_dark_theme
 from calculator import Calculator
 from order import Food
+from Text import Notebook
 
 
 template_main = '''<?xml version="1.0" encoding="UTF-8"?>
@@ -174,6 +175,19 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Я теееекст</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_3">
@@ -244,9 +258,14 @@ class Main(QDialog):
         self.pushButton_7.clicked.connect(self.set_light_theme)
         self.pushButton_9.clicked.connect(self.add)
         self.pushButton_10.clicked.connect(self.remove_item)
+        self.pushButton_6.clicked.connect(self.text)
 
         db.commit()
         db.close()
+
+    def text(self):
+        self.Note = Notebook(self)
+        self.Note.show()
 
     def add(self):
         if self.lineEdit.text() != '':
@@ -275,6 +294,7 @@ class Main(QDialog):
 
             self.Calculator.close()
             self.order.close()
+            self.Note.close()
         except Exception:
             pass
 
