@@ -10,7 +10,7 @@ from set_theme import set_light_theme, set_dark_theme
 from calculator import Calculator
 from order import Food
 from Text import Notebook
-
+from photo import MyPillow
 
 template_main = '''<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
@@ -188,6 +188,19 @@ template_main = '''<?xml version="1.0" encoding="UTF-8"?>
       </property>
      </widget>
     </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_11">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Фоточка</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="horizontalLayoutWidget_3">
@@ -259,9 +272,14 @@ class Main(QDialog):
         self.pushButton_9.clicked.connect(self.add)
         self.pushButton_10.clicked.connect(self.remove_item)
         self.pushButton_6.clicked.connect(self.text)
+        self.pushButton_11.clicked.connect(self.photo)
 
         db.commit()
         db.close()
+
+    def photo(self):
+        self.Photo = MyPillow(self)
+        self.Photo.show()
 
     def text(self):
         self.Note = Notebook(self)
@@ -295,6 +313,7 @@ class Main(QDialog):
             self.Calculator.close()
             self.order.close()
             self.Note.close()
+            self.Photo.close()
         except Exception:
             pass
 
